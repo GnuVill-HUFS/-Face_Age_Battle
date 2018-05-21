@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>얼굴나이 대결</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/footer_div.css" %}">
+
 </head>
-<hr>
-<body>
-<div class="container">
+
+<body background="{% static "images/adult-2028245.png" %}">
+<div>
     <br>
-    <div class="jumbotron" role="main">
-    <h1 align="center"> 얼굴 나이 대결<br>플랫폼 </h1>
+    <div class="jumbotron" role="main" align="center" style="background-color:black; color:whitesmoke">
+        <h1>얼굴나이 측정</h1>
     </div>
     <br><br>
     <div align="center">
@@ -24,13 +28,13 @@
     <!-- 메인화면 => 모드선택메뉴-->
 </div>
 
-<hr>
 
+
+<div class="footer" align="right">
+        <h3><p>Developed by Gnuvill<br>(팀원 : 노아론 이지은 임우영 장수경 전승현 홍찬혁 허승은)</p>
+        </h3>
+</div>
 </body>
 
-<foot>
-    <div class="inner" align="right">
-        <p>Developed by Gnuvill<br>(팀원 : 노아론 이지은 임우영 장수경 전승현 홍찬혁 허승은)</p>
-    </div>
-</foot>
+
 </html>
