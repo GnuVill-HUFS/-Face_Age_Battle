@@ -5,6 +5,7 @@ from face_battle import views
 urlpatterns = [
     url('home/',views.home), 
     url('single_mode/',views.single_mode),
-    url('dual_mode/',views.dual_mode)
+    url('dual_mode/',views.dual_mode),
+    url('mode_select/', views.mod_select),
 
 ]

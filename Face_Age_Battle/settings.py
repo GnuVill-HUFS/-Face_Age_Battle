@@ -20,17 +20,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-with open(BASE_DIR+'/Face_Age_Battle/KEY.json', 'r') as f:
-    KEY = json.loads(f.read())
-
-def get_setting_key(name, KEY=KEY):
-    try:
-        return KEY['SETTING_KEY']
-    except:
-        raise ImportError("KEY NAME : {0} is not matched".format(name))
+try:
+    with open(BASE_DIR + '/Face_Age_Battle/KEY.json', 'r') as f:
+        KEY = json.loads(f.read())
 
 
-SECRET_KEY = get_setting_key('SETTING_KEY')
+        def get_setting_key(name, KEY=KEY):
+            try:
+                return KEY['SETTING_KEY']
+            except:
+                raise ImportError("KEY NAME : {0} is not matched".format(name))
+
+
+        SECRET_KEY = get_setting_key('SETTING_KEY')
+except:
+    SECRET_KEY='111'
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
