@@ -44,34 +44,27 @@ def single_result(requests):
 
 def dual_result(requests):
 
-    picture1 =['pics1']
-    picture2 =['pics2']
+    picture1 =requests['pics1']
+    picture2 =requests['pics2']
 
-    image_info1 = imageFind(picture2)
-    image_info1 = {'sex': None}
+    image_info1 = imageFind(picture1)
+
     image_info2 = imageFind(picture2)
-    image_info2 = {'sex': None}
-
-
-    image_info1['age']=int(image_info1['age'])
-    image_info2['age']=int(image_info2['age'])
-
 
     if (image_info1['male']>image_info1['female']):
-        image_info1['sex']='남자'
-    elif (image_info1['male1']<image_info1['female']):
-        image_info1['sex']='여자'
+        image_info1['sex1']='남자'
+    elif (image_info1['male']<image_info1['female']):
+        image_info1['sex1']='여자'
     else:
-        image_info1['sex']='당첨'
+        image_info1['sex1']='당첨'
     if(image_info2['male']>image_info2['female']):
-        image_info2['sex']='남자'
-    elif(image_info2['male1']<image_info2['female']):
-        image_info2['sex']='여자'
+        image_info2['sex2']='남자'
+    elif(image_info2['male']<image_info2['female']):
+        image_info2['sex2']='여자'
     else:
-        image_info2['sex']='당첨'
+        image_info2['sex2']='당첨'
 
-    image_return = {}
-    image_return = {'picture1' : ['pics1'], 'picture2' : ['pics2'], 'age1' : image_info1['age'], 'age2' : image_info2['age'], 'sex1' : image_info1['sex'], 'sex2' : image_info2['sex']}
+    image_return = {'picture1' : picture1, 'picture2' : picture2, 'age1' : image_info1['age'], 'age2' : image_info2['age'], 'sex1' : image_info1['sex'], 'sex2' : image_info2['sex']}
 
 
     return render(requests, 'dual_result.html', image_return)
