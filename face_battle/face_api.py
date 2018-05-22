@@ -1,64 +1,17 @@
-import json
-import sys
-import argparse
-import requests
-from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
+def imageFind(requests):
 
-with open('../Face_Age_Battle/KEY.json','r') as f:
-    KEY = json.loads(f.read())
+    """
+    requests = ['image':이미지로컬저장위치] 라고 저장되어있음
 
-def get_KEY(name, KEY=KEY):
-    try:
-        return KEY['MYAPP_KEY']
-    except:
-        raise ImportError("KEY NAME : {0} is not matched".format(name))
+    KAKAO 비전API의 얼굴인식을 사용합니다.
 
-API_URL = 'https://kapi.kakao.com/v1/vision/face/detect'
-MYAPP_KEY = get_KEY('MYAPP_KEY')
+    return 값으로는 [나이정보, 성별 퍼센트, 닮은꼴]
+    이 필요합니다.
 
-def detect_face(filename):
-    headers = {'Authorization': 'KakaoAK {}'.format(MYAPP_KEY)}
-
-    try:
-        files = { 'file' : open(filename, 'rb')}
-        #files = { 'image_url' : filename}
-        resp = requests.post(API_URL, headers=headers, files=files)
-        resp.raise_for_status()
-
-        #print(resp.json())
-        return resp.json()
-    except Exception as e:
-        print(str(e))
-        sys.exit(0)
-
-def mosaic(filename, detection_result):
-    image = Image.open(filename)
-
-    for face in detection_result['result']['faces']:
-        x = int(face['x']*image.width)
-        w = int(face['w']*image.width)
-        y = int(face['y']*image.height)
-        h = int(face['h']*image.height)
-        box = image.crop((x,y,x+w, y+h))
-        box = box.resize((20,20), Image.NEAREST).resize((w,h), Image.NEAREST)
-        image.paste(box, (x,y,x+w, y+h))
-
-    return image
+    ** 선택사항
+    PIL 라이브러리 이용하여 requests로 받은 이미지에 얼굴위치를
+    (선으로) 적용시켜 사ㅋ람들이 눈으로 볼 수 있게끔 이미지처리를 한다.
+    """
 
 
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Mosaic faces.')
-    parser.add_argument('image_file', type=str, nargs='?',
-                        default="./migrations/seka.jpg",
-                        help='image file to hide faces')
-
-    args = parser.parse_args()
-
-    detection_result = detect_face(args.image_file)
-    image = mosaic(args.image_file, detection_result)
-    image.show()
-
-    for i in range(4):
-        print(detection_result['result']['faces'][i]['facial_attributes'])
+    return
