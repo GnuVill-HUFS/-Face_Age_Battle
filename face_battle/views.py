@@ -15,7 +15,8 @@ def mod_select(request):
 def main_page(requests):
     return render(requests, 'main.html')
 
-
+def dual_result(requests):
+    pass
 
 def single_result(requests):
 
