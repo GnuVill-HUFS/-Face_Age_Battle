@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>모드를 선택하세요</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" type="text/css" href="{% static "css/footer_div.css" %}">
 </head>
 <body background="{% static "images/adult-2028245.png" %}">
 <div>
@@ -15,12 +16,13 @@
     </div>
     <br><br>
     <div align="center">
-        <a href='../single_mode' class="btn btn-lg btn-success">
+        <a href='../single_mode' class="btn btn-lg btn-success" style="background-color: black; border:3px solid white ">
         <h1>1인용</h1>
     </a>
+        <br><br><br><br><br><br><br>
     </div>
     <div align="center">
-       <a href='../dual_mode' class="btn btn-lg btn-success">
+       <a href='../dual_mode' class="btn btn-lg btn-success" style="background-color: black; border:3px solid white ">
        <h1>2인용</h1>
     </a>
     </div>
