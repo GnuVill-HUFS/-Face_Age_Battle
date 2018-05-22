@@ -9,4 +9,5 @@ urlpatterns = [
     url('mode_select/', views.mod_select),
     url('main_page/',views.main_page),
     url('single_result/',views.single_result)
+    url('dual_result/', views.dual_result)
 ]
