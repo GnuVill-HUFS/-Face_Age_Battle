@@ -57,16 +57,15 @@ def dual_result(requests):
     image_info2['age']=int(image_info2['age'])
 
 
-    if(image_info1['male']>image_info1['female']):
+    if (image_info1['male']>image_info1['female']):
         image_info1['sex']='남자'
-    else if(image_info1['male1']<image_imfo1['female']):
+    elif (image_info1['male1']<image_info1['female']):
         image_info1['sex']='여자'
     else:
         image_info1['sex']='당첨'
-
     if(image_info2['male']>image_info2['female']):
         image_info2['sex']='남자'
-    else if(image_info2['male1']<image_imfo2['female']):
+    elif(image_info2['male1']<image_info2['female']):
         image_info2['sex']='여자'
     else:
         image_info2['sex']='당첨'
