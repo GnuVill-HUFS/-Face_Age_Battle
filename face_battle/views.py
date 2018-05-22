@@ -38,38 +38,3 @@ def single_result(requests):
 
     return render(requests, 'single_result.html', image_info)
 
-
-def dual_result(requests):
-
-    picture1 =['pics1']
-    picture2 =['pics2']
-
-    image_info1 = imageFind(picture2)
-    image_info1 = {'sex': None}
-    image_info2 = imageFind(picture2)
-    image_info2 = {'sex': None}
-
-
-    image_info1['age']=int(image_info1['age'])
-    image_info2['age']=int(image_info2['age'])
-
-
-    if(image_info1['male']>image_info1['female']):
-        image_info1['sex']='남자'
-    else if(image_info1['male1']<image_imfo1['female']):
-        image_info1['sex']='여자'
-    else:
-        image_info1['sex']='당첨'
-
-    if(image_info2['male']>image_info2['female']):
-        image_info2['sex']='남자'
-    else if(image_info2['male1']<image_imfo2['female']):
-        image_info2['sex']='여자'
-    else:
-        image_info2['sex']='당첨'
-
-    image_return = {}
-    image_return = {'picture1' : ['pics1'], 'picture2' : ['pics2'], 'age1' : image_info1['age'], 'age2' : image_info2['age'], 'sex1' : image_info1['sex'], 'sex2' : image_info2['sex']}
-
-
-    return render(requests, 'dual_result.html', image_return)
