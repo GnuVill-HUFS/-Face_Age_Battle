@@ -1,0 +1,116 @@
+<!doctype thml>
+<html>
+<head>
+<meta charset="utf-8">
+<title>single_mode</title>
+<input type="file" accept="image/*;capture=camera">
+<device type="media" onchange="update(this.data)">
+</device>
+<video autoplay></video>
+<script>
+   function update(stream) {
+      document.querySelector('video').src = stream.url;
+   }
+   function hasGetUserMedia(){
+      return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+   }
+   if (hasGetUserMedia()){
+   } else {
+      alert('getUserMedia() is not supported by your browser');
+   }
+   const constraints = {
+      video: true
+   };
+   const video = document.querySelector('video');
+   function handleSuccess(stream) {
+      video.srcObject = stream;
+   }
+   function handleError(error){
+      condole.error('Reeeejected!',error);
+   }
+   navigator.mediaDevices.getUserMedia(constraints).
+      then(handleSuccess).catch(handleError);
+
+   const videoElement = document.querySelector('video');
+   const audioSelect = document.querySelector('select#audioSource');
+   const videoSelect = document.querySelector('select#videoSource');
+
+   navigator.mediaDevices.enumerateDevices()
+     .then(gotDevices).then(getStream).catch(handleError);
+
+   audioSelect.onchange = getStream;
+   videoSelect.onchange = getStream;
+
+   function gotDevices(deviceInfos) {
+     for (var i = 0; i !== deviceInfos.length; ++i) {
+       var deviceInfo = deviceInfos[i];
+       var option = document.createElement('option');
+       option.value = deviceInfo.deviceId;
+       if (deviceInfo.kind === 'audioinput') {
+         option.text = deviceInfo.label ||
+           'microphone ' + (audioSelect.length + 1);
+         audioSelect.appendChild(option);
+       } else if (deviceInfo.kind === 'videoinput') {
+         option.text = deviceInfo.label || 'camera ' +
+           (videoSelect.length + 1);
+         videoSelect.appendChild(option);
+       } else {
+         console.log('Found one other kind of source/device: ', deviceInfo);
+       }
+     }
+   }
+
+   function getStream() {
+     if (window.stream) {
+       window.stream.getTracks().forEach(function(track) {
+         track.stop();
+       });
+     }
+
+     var constraints = {
+       audio: {
+         deviceId: {exact: audioSelect.value}
+       },
+       video: {
+         deviceId: {exact: videoSelect.value}
+       }
+     };
+
+     navigator.mediaDevices.getUserMedia(constraints).
+       then(gotStream).catch(handleError);
+   }
+
+   function gotStream(stream) {
+     window.stream = stream; // make stream available to console
+     videoElement.srcObject = stream;
+   }
+
+   function handleError(error) {
+     console.error('Error: ', error);
+   }
+
+
+   const button = document.querySelector('#screenshot-button');
+   const img = document.querySelector('#screenshot-img');
+   const video = document.querySelector('#screenshot-video');
+   const canvas = document.createElement('canvas');
+
+   button.onclick = video.onclick = funtion() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video,0,0);
+      img.src = canvas.toDataURL('imgae/webp');
+   };
+   funtion handleSuccess(stream){
+      video.srcObject = stream;
+   }
+   navigator.mediaDevices.getUserMedia(constraints).
+      then(handleSuccess).catch(handleError);
+</script>
+</head>
+<body>
+   <h1>1인모드 화면 (single_mode)</h1>
+
+</body>
+
+</html>
