@@ -7,5 +7,6 @@ urlpatterns = [
     url('single_mode/',views.single_mode),
     url('dual_mode/',views.dual_mode),
     url('mode_select/', views.mod_select),
-
+    url('main_page/',views.main_page),
+    url('single_result/',views.single_result)
 ]

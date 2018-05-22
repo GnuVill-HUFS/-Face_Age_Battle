@@ -12,6 +12,9 @@ def dual_mode(request):
 def mod_select(request):
     return render(request, 'mode_select.html')
 
+def main_page(requests):
+    return render(requests, 'main.html')
+
 
 
 def single_result(requests):
@@ -27,11 +30,11 @@ def single_result(requests):
 
     if(image_info['male']>image_info['female']):
         image_info['sex']='남자'
-    else if(image_info['male']<image_imfo['female']):
+    elif(image_info['male']<image_info['female']):
         image_info['sex']='여자'
     else:
         image_info['sex']='당첨'
 
 
-    return render(requests, 'single_mode.html', image_info)
+    return render(requests, 'single_result.html', image_info)
 
