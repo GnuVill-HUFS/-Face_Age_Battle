@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
 from .face_api import imageFind
+
 def home(request):
     return render(request,'main.html')
     
@@ -19,52 +21,15 @@ def dual_result(requests):
     pass
 
 def single_result(requests):
-
-    picture =['pics']
-    try:
-        image_info = imageFind(picture)
-        image_info = {'sex': None}
-
-        image_info['age'] = int(image_info['age'])
-
-        if (image_info['male'] > image_info['female']):
-            image_info['sex'] = '남자'
-        elif (image_info['male'] < image_info['female']):
-            image_info['sex'] = '여자'
-        else:
-            image_info['sex'] = '당첨'
-    except:
-        image_info['age'] = "21"
-        image_info['sex'] = "남자"
-
-
-
-    return render(requests, 'single_result.html', image_info)
-
-
-def dual_result(requests):
-
-    picture1 =requests['pics1']
-    picture2 =requests['pics2']
-
-    image_info1 = imageFind(picture1)
-
-    image_info2 = imageFind(picture2)
-
-    if (image_info1['male']>image_info1['female']):
-        image_info1['sex1']='남자'
-    elif (image_info1['male']<image_info1['female']):
-        image_info1['sex1']='여자'
+    image_info = imageFind()
+    image_info['age'] = (int(image_info['age']))
+    print(image_info)
+    if (image_info['male'] > image_info['female']):
+        image_info['sex'] = '남자'
+    elif (image_info['male'] < image_info['female']):
+        image_info['sex'] = '여자'
     else:
-        image_info1['sex1']='당첨'
-    if(image_info2['male']>image_info2['female']):
-        image_info2['sex2']='남자'
-    elif(image_info2['male']<image_info2['female']):
-        image_info2['sex2']='여자'
-    else:
-        image_info2['sex2']='당첨'
+        image_info['sex'] = '당첨'
+    #print(requests)
 
-    image_return = {'picture1' : picture1, 'picture2' : picture2, 'age1' : image_info1['age'], 'age2' : image_info2['age'], 'sex1' : image_info1['sex'], 'sex2' : image_info2['sex']}
-
-
-    return render(requests, 'dual_result.html', image_return)
+    return render(requests, './single_result.html', image_info)
