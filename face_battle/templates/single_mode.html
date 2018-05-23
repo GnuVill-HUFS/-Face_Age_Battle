@@ -206,7 +206,9 @@ filter: invert(1);
 
 <video id="player" controls autoplay></video>
 <button id="capture">Capture</button>
+<form action="./single_result.html" method="post">
 <canvas id="snapshot" width=320 height=240></canvas>
+
 <script>
   var player = document.getElementById('player');
   var snapshotCanvas = document.getElementById('snapshot');
@@ -227,8 +229,7 @@ filter: invert(1);
   navigator.mediaDevices.getUserMedia({video: true})
       .then(handleSuccess);
 </script>
-	</div>
-<form action="./single_result.html" method="post">
+
 <input type="submit">
 </form>
 
