@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from .face_api import imageFind
 
 def home(request):
@@ -20,6 +20,7 @@ def main_page(requests):
 def dual_result(requests):
     pass
 
+@csrf_exempt
 def single_result(requests):
     image_info = imageFind()
     image_info['age'] = (int(image_info['age']))

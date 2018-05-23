@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -80,7 +81,7 @@
 
 
 
-	<link rel="stylesheet" media="all" href="/static/css/v2-combined.min.css?20131111">
+   <link rel="stylesheet" media="all" href="/static/css/v2-combined.min.css?20131111">
 
 
 
@@ -96,7 +97,7 @@
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
 <![endif]-->
-<video autoplay></video>
+<!--video autoplay></video-->
 
 <script>
 const constraints = {
@@ -205,8 +206,8 @@ filter: invert(1);
 <body>
 
 <video id="player" controls autoplay></video>
-<button id="capture">Capture</button>
-<form action="./single_result.html" method="post">
+<button class="download" id="capture">Capture</button>
+<form>
 <canvas id="snapshot" width=320 height=240></canvas>
 
 <script>
@@ -229,10 +230,17 @@ filter: invert(1);
   navigator.mediaDevices.getUserMedia({video: true})
       .then(handleSuccess);
 </script>
-
-<input type="submit">
+<button onclick="downloadCanvas">저장하기</button>
+<a href="../single_result">전송하기</a>
 </form>
 
+ <script>
+     function downloadCanvas() {
+         this.href = document.getElementById('snapshot').toDataURL();
+         this.download = "image.png";
+     }
+
+ </script>
 
 </body>
 </html>
