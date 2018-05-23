@@ -1,0 +1,237 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta property="twitter:account_id" content="1593210261">
+<!-- Copyright (c) 2012 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Author: Eric Bidelman - e.bidelman@google.com
+ *
+ *
+ *
+-->
+<title>Capturing Audio &amp; Video in HTML5 - HTML5 Rocks</title>
+<meta name="description" content="How to capture audio and video using the navigator.getUserMedia() API.">
+<meta name="keywords" content="html5,html 5,html5 demos,html5 examples,javascript,css3,notifications,geolocation,web workers,apppcache,file api,filereader,indexeddb,offline,audio,video,drag and drop,chrome,sse,mobile">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta name="theme-color" content="#f04530">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="HTML5 Rocks RSS" href="http://feeds.feedburner.com/html5rocks">
+<meta name="google-site-verification" content="E1HOIDkksrWY5npenL8FeQhKn4Ujctd75iO2lfufSyA">
+<meta itemprop="name" content="Capturing Audio &amp; Video in HTML5 - HTML5 Rocks">
+<meta itemprop="description" content="How to capture audio and video using the navigator.getUserMedia() API.">
+
+<meta itemprop="image" content="https://www.html5rocks.com/static/images/html5rocks-logo-wings.png">
+
+
+
+
+<link rel="canonical" href="https://developers.google.com/web/fundamentals/native-hardware/capturing-images/">
+
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@ChromiumDev">
+<meta name="twitter:creator" content="@ebidel">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Capturing Audio &amp; Video in HTML5 - HTML5 Rocks">
+<meta property="og:url" content="https://www.html5rocks.com/en/tutorials/getusermedia/intro/">
+<meta property="og:description" content="How to capture audio and video using the navigator.getUserMedia() API.">
+<meta property="og:image" content="https://www.html5rocks.com/static/images/profiles/ericbidelman.png">
+<meta property="og:site_name" content="HTML5 Rocks - A resource for open web HTML5 developers">
+
+
+
+<link rel="author" href="https://www.google.com/profiles/118075919496626375791">
+
+
+<link rel="publisher" href="https://plus.google.com/+GoogleChromeDevelopers">
+
+
+
+<link rel="alternate" hreflang="pt" href="https://www.html5rocks.com/pt/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="ru" href="https://www.html5rocks.com/ru/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="zh" href="https://www.html5rocks.com/zh/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="de" href="https://www.html5rocks.com/de/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="es" href="https://www.html5rocks.com/es/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="ja" href="https://www.html5rocks.com/ja/tutorials/getusermedia/intro/">
+
+<link rel="alternate" hreflang="ko" href="https://www.html5rocks.com/ko/tutorials/getusermedia/intro/">
+
+
+
+
+
+	<link rel="stylesheet" media="all" href="/static/css/v2-combined.min.css?20131111">
+
+
+
+
+
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,800|Source+Code+Pro" rel="stylesheet">
+
+<link rel="apple-touch-icon" href="/static/images/identity/HTML5_Badge_64.png">
+<link rel="apple-touch-icon-precomposed" href="/static/images/identity/HTML5_Badge_64.png">
+
+<script type="text/javascript" src="https://html5rocks.disqus.com/count.js" async=""></script><script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-MB3LRF"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-MB3LRF"></script><script src="/static/js/modernizr.custom.82437.js"></script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
+<![endif]-->
+<video autoplay></video>
+
+<script>
+const constraints = {
+  video: true
+};
+
+const video = document.querySelector('video');
+
+function handleSuccess(stream) {
+  video.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error('Reeeejected!', error);
+}
+
+navigator.mediaDevices.getUserMedia(constraints).
+  then(handleSuccess).catch(handleError);
+</script>
+
+<style>
+.videostream, #cssfilters-video, #screenshot, #screenshot-img {
+width: 400px;
+height: 300px;
+}
+.videostream, #cssfilters-stream {
+background: rgba(255,255,255,0.5);
+border: 1px solid #ccc;
+}
+#screenshot {
+vertical-align: top;
+}
+.blur {
+-webkit-filter: blur(3px);
+-moz-filter: blur(3px);
+-o-filter: blur(3px);
+-ms-filter: blur(3px);
+filter: blur(3px);
+}
+.brightness {
+-webkit-filter: brightness(5);
+-moz-filter: brightness(5);
+-o-filter: brightness(5);
+-ms-filter: brightness(5);
+filter: brightness(5);
+}
+.contrast {
+-webkit-filter: contrast(8);
+-moz-filter: contrast(8);
+-o-filter: contrast(8);
+-ms-filter: contrast(8);
+filter: contrast(8);
+}
+.hue-rotate {
+-webkit-filter: hue-rotate(90deg);
+-moz-filter: hue-rotate(90deg);
+-o-filter: hue-rotate(90deg);
+-ms-filter: hue-rotate(90deg);
+filter: hue-rotate(90deg);
+}
+.hue-rotate2 {
+-webkit-filter: hue-rotate(180deg);
+-moz-filter: hue-rotate(180deg);
+-o-filter: hue-rotate(180deg);
+-ms-filter: hue-rotate(180deg);
+filter: hue-rotate(180deg);
+}
+.hue-rotate3 {
+-webkit-filter: hue-rotate(270deg);
+-moz-filter: hue-rotate(270deg);
+-o-filter: hue-rotate(270deg);
+-ms-filter: hue-rotate(270deg);
+filter: hue-rotate(270deg);
+}
+.saturate {
+-webkit-filter: saturate(10);
+-moz-filter: saturate(10);
+-o-filter: saturate(10);
+-ms-filter: saturate(10);
+filter: saturate(10);
+}
+.grayscale {
+-webkit-filter: grayscale(1);
+-moz-filter: grayscale(1);
+-o-filter: grayscale(1);
+-ms-filter: grayscale(1);
+filter: grayscale(1);
+}
+.sepia {
+-webkit-filter: sepia(1);
+-moz-filter: sepia(1);
+-o-filter: sepia(1);
+-ms-filter: sepia(1);
+filter: sepia(1);
+}
+.invert {
+-webkit-filter: invert(1);
+-moz-filter: invert(1);
+-o-filter: invert(1);
+-ms-filter: invert(1);
+filter: invert(1);
+}
+</style>
+
+</head>
+<body>
+
+<video id="player" controls autoplay></video>
+<button id="capture">Capture</button>
+<canvas id="snapshot" width=320 height=240></canvas>
+<script>
+  var player = document.getElementById('player');
+  var snapshotCanvas = document.getElementById('snapshot');
+  var captureButton = document.getElementById('capture');
+
+  var handleSuccess = function(stream) {
+    // Attach the video stream to the video element and autoplay.
+    player.srcObject = stream;
+  };
+
+  captureButton.addEventListener('click', function() {
+    var context = snapshot.getContext('2d');
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, snapshotCanvas.width,
+        snapshotCanvas.height);
+  });
+
+  navigator.mediaDevices.getUserMedia({video: true})
+      .then(handleSuccess);
+</script>
+	</div>
+<form action="./single_result.html" method="post">
+<input type="submit">
+</form>
+
+
+</body>
+</html>
